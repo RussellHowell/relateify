@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders when the list is empty: artist-list-empty 1`] = `<ul />`;
+
+exports[`renders when the list is populated: artist-list-populated 1`] = `
+<ul>
+  <li>
+    Toro y Moi
+  </li>
+  <li>
+    Toronto Symphony Orchestra
+  </li>
+  <li>
+    Toronto Chamber Orchestra
+  </li>
+  <li>
+    Toronto 7s
+  </li>
+</ul>
+`;
