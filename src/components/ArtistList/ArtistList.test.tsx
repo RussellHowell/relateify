@@ -8,7 +8,8 @@ import ArtistList from './ArtistList';
  it('renders when the list is empty', () => {
   const tree = TestRenderer.create(
     <ArtistList
-      data={ [] }
+      data={[]}
+      onArtistSelected={() => { } }
     />
  ).toJSON();
    expect(tree).toMatchSnapshot('artist-list-empty');
@@ -17,7 +18,8 @@ import ArtistList from './ArtistList';
 it('renders when the list is populated', () => {
   const tree = TestRenderer.create(
     <ArtistList
-      data={ getTestData() }
+      data={getTestData()}
+      onArtistSelected={() => { } }
     />
   ).toJSON();
   expect(tree).toMatchSnapshot('artist-list-populated');
@@ -26,7 +28,8 @@ it('renders when the list is populated', () => {
 
 const populatedArtistList: ShallowWrapper = shallow(
   <ArtistList
-    data={ getTestData() }
+    data={getTestData()}
+    onArtistSelected={() => { } }
   />
 )
 
