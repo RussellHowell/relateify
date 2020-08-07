@@ -1,24 +1,48 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useEffect } from 'react';
 import './App.css';
+import { Artist } from './interfaces';
+import SpotifySession from './components/SpotifySession';
+import * as _ from 'lodash';
+import ArtistList from './components/ArtistList';
+import ArtistSearch from './components/ArtistSearch';
+import  SpotifyAuthContext  from './contexts/SpotAuthContext';
+import { fromPairs } from 'lodash';
+import SpotAuthContext from './contexts/SpotAuthContext';
+const queryString = require('query-string');
 
 function App() {
+  const [validAuth, setValidAuth] = React.useState(false);
+  const accessToken = _.get(queryString.parseUrl(window.location.href), ['query', 'access_token']);
+  if (!_.isUndefined(accessToken) && !validAuth) {
+    setValidAuth(true);
+  }
+  
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Relateify</h1>
+      {
+        validAuth ? (
+        <SpotAuthContext.Provider value={ accessToken }>
+            <ArtistSearch />
+        </SpotAuthContext.Provider>
+        ) : <button onClick={() => { window.location.assign('http://localhost:8888/login') }}>Login</button>
+      }
+
+      {/* <h2> Relateify </h2>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          setQuery(search);
+        }}>
+        <input
+          value={search}
+          onChange={(e) => {
+            setSearch(e.target.value);
+          }}
+        />
+      </form> */}
     </div>
   );
 }
